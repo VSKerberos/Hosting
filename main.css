@@ -13,22 +13,32 @@
     position: relative;
 }
 
-.section-title {
-    color: #2ddf5c;
-    text-align: center;
-}
-
 #product-overview h1 {
     color: white;
     font-family: 'Anton', sans-serif;
     position: absolute;
     bottom: 5%;
     left: 3%;
+    font-size: 1.6rem;
+}
+
+@media(min-width:40rem) {
+    #product-overview {
+        height: 40vh;
+        background-position: 50% 25%;
+    }
+    #product-overview h1 {
+        font-size: 3rem;
+    }
+}
+
+.section-title {
+    color: #2ddf5c;
+    text-align: center;
 }
 
 .plan__list {
-    width: 80%;
-    margin: auto;
+    width: 100%;
     text-align: center;
 }
 
@@ -37,8 +47,8 @@
     text-align: center;
     padding: 16px;
     margin: 8px;
-    display: inline-block;
-    width: 30%;
+    display: block;
+    width: 100%;
     vertical-align: middle;
 }
 
@@ -82,6 +92,17 @@
     margin: 8px 0;
 }
 
+@media(min-width:40rem) {
+    .plan-list {
+        width: 100%;
+        text-align: center;
+    }
+    .plan {
+        display: inline-block;
+        width: 30%;
+    }
+}
+
 #key-features {
     background: #ff1b68;
     margin-top: 80px;
@@ -119,6 +140,13 @@
     font-weight: bold;
     color: white;
     font-size: 20px;
+}
+
+@media(max-width:40rem) {
+    .key-feature {
+        display: block;
+        width: unset;
+    }
 }
 
 
