@@ -1,3 +1,10 @@
+/* :root element select entire document */
+
+:root {
+    --dark-green: #0e4f1f;
+    --highlight-color: #ff1b68;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -7,6 +14,11 @@ html {}
 body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
+}
+
+main {
+    min-height: calc(100vh-3.5rem - 8rem);
+    margin-top: 3.5rem;
 }
 
 .backdrop {
@@ -28,15 +40,26 @@ body {
     background: #2ddf5c;
     padding: 8px 16px;
     z-index: 1;
+    display: -webkit-box;
+    /*  works for older versions of safari */
+    display: -ms-flexbox;
+    /* internet explorer*/
+    display: -webkit-flex;
+    /* new versions */
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .main-header__brand {
-    color: #0e4f1f;
+    color: var(--dark-green);
     text-decoration: none;
+    /* font-size: 1.5rem; */
+    height: 2.5rem;
     font-weight: bold;
+    height: 1.5rem;
+    display: inline-block;
+    vertical-align: text-bottom;
 }
 
 .main-header__brand img {
@@ -46,7 +69,7 @@ body {
 .main-nav {
     display: inline-block;
     text-align: right;
-    width: calc(100% - 74px);
+    width: calc(100% - 122px);
     vertical-align: middle;
 }
 
@@ -61,9 +84,10 @@ body {
     margin: 0 16px;
 }
 
-.main-nav__item a {
+.main-nav__item a,
+.mobile-nav__item a {
     text-decoration: none;
-    color: #0e4f1f;
+    color: var(--dark-green);
     font-weight: bold;
     padding: 3px 0;
 }
@@ -74,18 +98,31 @@ body {
     border-bottom: 5px solid white;
 }
 
-.main-nav__item--cta a {
+.main-nav__item--cta {
+    animation: wiggle 200ms 3s 8 alternate;
+}
+
+.main-nav__item--cta a,
+.mobile-nav__item--cta a {
     color: white;
-    background: #ff1b68;
+    background: var(--highlight-color);
     padding: 8px 16px;
     border-radius: 8px;
 }
 
 .main-nav__item--cta a:hover,
-.main-nav__item--cta a:active {
-    color: #ff1b68;
+.main-nav__item--cta a:active,
+.mobile-nav__item--cta a:hover,
+.mobile-nav__item--cta a:active {
+    color: var(--highlight-color);
     background: white;
     border: none;
+}
+
+@media (max-width:40rem) {
+    .main-nav {
+        display: none;
+    }
 }
 
 .main-footer {
@@ -117,10 +154,10 @@ body {
 }
 
 .button {
-    background: #0e4f1f;
+    background: var(--dark-green);
     color: white;
     font: inherit;
-    border: 1.5px solid #0e4f1f;
+    border: 1.5px solid var(--dark-green);
     padding: 8px;
     border-radius: 8px;
     font-weight: bold;
@@ -130,9 +167,124 @@ body {
 .button:hover,
 .button:active {
     background-color: white;
-    color: #0e4f1f;
+    color: var(--dark-green);
 }
 
 .button:focus {
     outline: none;
+}
+
+@keyframes wiggle {
+    0% {
+        transform: rotateZ(0);
+    }
+    50% {
+        transform: rotateZ(-10deg);
+    }
+    100% {
+        transform: rotateZ(10deg);
+    }
+}
+
+.mobile-nav {
+    display: none;
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    background: white;
+    width: 80%;
+    height: 100vh;
+}
+
+.mobile-nav__items {
+    width: 90%;
+    height: 100%;
+    list-style: none;
+    margin: 10% auto;
+    padding: 0;
+    text-align: center;
+}
+
+.mobile-nav__item {
+    margin: 1rem 0;
+}
+
+.mobile-nav__item a {
+    font-size: 1.5rem;
+}
+
+.toggle-button {
+    width: 3rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding-top: 0;
+    padding-bottom: 0;
+    vertical-align: middle;
+}
+
+.toggle-button:focus {
+    outline: none;
+}
+
+.toggle-button__bar {
+    width: 100%;
+    height: 0.2rem;
+    background: black;
+    display: block;
+    margin: 0.6rem 0;
+}
+
+.modal {
+    position: fixed;
+    display: none;
+    z-index: 200;
+    top: 20%;
+    left: 30%;
+    width: 40%;
+    background: white;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.modal__title {
+    text-align: center;
+    margin: 0 0 1rem 0;
+}
+
+.modal__actions {
+    text-align: center;
+}
+
+.modal__action {
+    border: 1px solid #0e4f1f;
+    background: #0e4f1f;
+    text-decoration: none;
+    color: white;
+    font: inherit;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.modal__action:hover,
+.modal__action:active {
+    background: #2ddf5c;
+    border-color: #2ddf5c;
+}
+
+.modal__action--negative {
+    background: red;
+    border-color: red;
+}
+
+.modal__action--negative:hover,
+.modal__action--negative:active {
+    background: #ff5454;
+    border-color: #ff5454;
+}
+
+.open {
+    display: block !important;
 }
